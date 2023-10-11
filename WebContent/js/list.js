@@ -29,12 +29,11 @@ window.onload = async () => {
 	await fetch("/CommandPattern/main", { method: "post", body })
 		.then((res) => res.text())
 		.then((res) => {
-			console.log(res);
 			json = JSON.parse(res);
 		});
 	
 	let ihtml2 = "";
-	for(let elem in json) {
+	for(let elem in json["posts"]) {
 		ihtml2 += "<tr>";
 		ihtml2 += "<td>" + json["title"] + "</td>";
 		ihtml2 += "<td>" + json["author"] + "</td>";
