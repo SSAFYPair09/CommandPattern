@@ -43,7 +43,7 @@ public class PostDAOImpl {
 				String content = rs.getString(3);
 				String author = rs.getString(4);
 				int visited = rs.getInt(5);
-				Timestamp created_at = rs.getTimestamp(6);
+				String created_at = rs.getTimestamp(6).toString();
 				Post p = new Post(id, title, content, author, created_at, visited);
 				posts.add(p);
 			}

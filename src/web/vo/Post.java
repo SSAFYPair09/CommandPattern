@@ -5,8 +5,7 @@ import java.sql.Timestamp;
 public class Post {
 
 	int id;
-	String title, content, author;
-	Timestamp created_at;
+	String title, content, author, created_at;
 
 	int visited;
 	
@@ -16,7 +15,7 @@ public class Post {
 	}
 
 
-	public Post(int id, String title, String content, String author, Timestamp created_at, int visited) {
+	public Post(int id, String title, String content, String author, String created_at, int visited) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -58,10 +57,10 @@ public class Post {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	public Timestamp getCreated_at() {
+	public String getCreated_at() {
 		return created_at;
 	}
-	public void setCreated_at(Timestamp created_at) {
+	public void setCreated_at(String created_at) {
 		this.created_at = created_at;
 	}
 	public int getVisited() {
