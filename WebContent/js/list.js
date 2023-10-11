@@ -13,7 +13,7 @@ function createListHeader() {
 	return ihtml.join("");
 }
 
-window.onload = async () => {
+async function listPost() {
 	const root = document.getElementById("root");
 	
 	root.innerHTML = "";
@@ -46,3 +46,4 @@ window.onload = async () => {
 	root.innerHTML = "<pre>" + ihtml + ihtml2 + "</table></pre>";
 }
 
+document.getElementById("listPageLoad").onclick = listPost;
