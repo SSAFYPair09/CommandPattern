@@ -81,9 +81,6 @@ public class MainServlet extends HttpServlet {
 	            
 	        }
 	        
-	        String json = om.writeValueAsString(rmap);
-	        out.append(json);
-	        
 	}
 
 }

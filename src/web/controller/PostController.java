@@ -20,21 +20,21 @@ import web.vo.Post;
 public class PostController implements Controller {
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=utf-8");
-        PrintWriter out=response.getWriter();
-	    ObjectMapper om = new ObjectMapper();
-	    Map<String, String> map = new HashMap<>();
-        try {
-	        PostServiceImpl postService = PostServiceImpl.getInstance();
-	        List<Post> list = postService.getPosts();
-	       
-	        map.put("posts", om.writeValueAsString(list));
-        } catch (Exception e) {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		ObjectMapper om = new ObjectMapper();
+		Map<String, Object> map = new HashMap<>();
+		List<Post> list;
+		try {
+			PostServiceImpl postService = PostServiceImpl.getInstance();
+			list = postService.getPosts();
+			map.put("posts", list);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-        String json = om.writeValueAsString(map);
-        System.out.println(json);
-        out.append(json);
+		String json = om.writeValueAsString(map);
+		System.out.println(json);
+		out.append(json);
 	}
 
 }
