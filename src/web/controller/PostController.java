@@ -23,11 +23,12 @@ public class PostController implements Controller {
         response.setContentType("text/html;charset=utf-8");
         PrintWriter out=response.getWriter();
 	    ObjectMapper om = new ObjectMapper();
-	    Map<String, Object> map = new HashMap<>();
+	    Map<String, String> map = new HashMap<>();
         try {
 	        PostServiceImpl postService = PostServiceImpl.getInstance();
 	        List<Post> list = postService.getPosts();
-	        map.put("posts", list);
+	       
+	        map.put("posts", om.writeValueAsString(list));
         } catch (Exception e) {
 			e.printStackTrace();
 		}
