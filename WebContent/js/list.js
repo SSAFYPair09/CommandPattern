@@ -28,7 +28,10 @@ window.onload = async () => {
 	let json = null;
 	await fetch("/CommandPattern/main", { method: "post", body })
 		.then((res) => res.text())
-		.then((res) => (json = JSON.parse(res)));
+		.then((res) => {
+			json = JSON.parse(res);
+			console.log(json);
+		});
 	
 	let ihtml2 = "";
 	for(let elem in json) {
