@@ -35,5 +35,5 @@ CREATE TABLE post (
     content VARCHAR(5000),
     author VARCHAR(100),
     visited INT DEFAULT 0,
-    created_at TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
