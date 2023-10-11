@@ -61,13 +61,16 @@ public class MainServlet extends HttpServlet {
 	            if(sign != null) {
 	                
 	                HttpSession session=null;
-	                
+	                Controller con;
 	                switch(sign) {
 	                case "listPost":
-	                	Controller con = controllers.get("PostController");
+	                	con = controllers.get("PostController");
 	                	con.service(request, response);
 	                    break;
-	                    
+	                case "writePost":
+	                	con = controllers.get("WriteController");
+	                	con.service(request, response);
+	                    break;
 	                 default : rmap.put("msg", "sorry");
 	                }
 	            } else {
@@ -78,9 +81,6 @@ public class MainServlet extends HttpServlet {
 	        } catch(Exception e) {
 	            e.printStackTrace();
 	            rmap.put("msg", e.getMessage());
-	            
 	        }
-	        
 	}
-
 }

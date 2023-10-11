@@ -1,3 +1,4 @@
 <beans>
 	<bean class='web.controller.PostController' id='PostController'></bean>
+	<bean class='web.controller.WriteController' id='WriteController'></bean>
 </beans>
