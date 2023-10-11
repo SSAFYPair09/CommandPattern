@@ -29,8 +29,8 @@ window.onload = async () => {
 	await fetch("/CommandPattern/main", { method: "post", body })
 		.then((res) => res.text())
 		.then((res) => {
+			console.log(res);
 			json = JSON.parse(res);
-			console.log(json);
 		});
 	
 	let ihtml2 = "";
