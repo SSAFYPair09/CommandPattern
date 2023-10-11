@@ -3,11 +3,11 @@ function createListHeader() {
 	let idx = 0;
 	
 	
-	ihtml[idx++] = "<tr>";
+	ihtml[idx++] = "<table><tr>";
 	ihtml[idx++] = "<th>제목</th>";
-	ihtml[idx++] = "<th>작성자</th>";
-	ihtml[idx++] = "<th>작성일</th>";
-	ihtml[idx++] = "<th>조회수</th>";
+	ihtml[idx++] = " <th>작성자</th>";
+	ihtml[idx++] = " <th>작성일</th>";
+	ihtml[idx++] = " <th>조회수</th>";
 	ihtml[idx++] = "</tr>";
 	
 	return ihtml.join("");
@@ -29,19 +29,20 @@ window.onload = async () => {
 	await fetch("/CommandPattern/main", { method: "post", body })
 		.then((res) => res.text())
 		.then((res) => {
+			console.log(res);
 			json = JSON.parse(res);
 		});
 	
 	let ihtml2 = "";
-	for(let elem in json["posts"]) {
+	for(let elem of json["posts"]) {
 		ihtml2 += "<tr>";
-		ihtml2 += "<td>" + json["title"] + "</td>";
-		ihtml2 += "<td>" + json["author"] + "</td>";
-		ihtml2 += "<td>" + json["created_at"] + "</td>";
-		ihtml2 += "<td>" + json["visited"] + "</td>";
+		ihtml2 += "<td>" + elem["title"] + "</td>";
+		ihtml2 += " <td>" + elem["author"] + "</td>";
+		ihtml2 += " <td>" + elem["created_at"] + "</td>";
+		ihtml2 += " <td>" + elem["visited"] + "</td>";
 		ihtml2 += "</tr>";
 	}
 	
-	root.innerHTML = ihtml + ihtml2;
+	root.innerHTML = "<pre>" + ihtml + ihtml2 + "</table></pre>";
 }
 
