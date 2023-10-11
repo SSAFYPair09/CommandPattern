@@ -24,12 +24,11 @@ window.onload = async () => {
 			sign: "listPost"
 	};
 	
+	body = JSON.stringify(body);
 	let json = null;
-	await fetch("/main", {method: "post", body})
+	await fetch("/CommandPattern/main", {method: "post", body})
 	.then((res) => res.text())
-	.then((res) =>
-		json = JSON.parse(res);
-	);
+	.then((res) => json = JSON.parse(res));
 	
 	let ihtml2 = "";
 	for(let elem in json) {

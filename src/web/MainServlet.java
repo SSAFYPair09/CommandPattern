@@ -1,4 +1,4 @@
-package web.controller;
+package web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,14 +15,23 @@ import javax.servlet.http.HttpSession;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import web.util.RSAEncryption;
+import web.controller.Controller;
+import web.controller.XmlBeanFactory;
 
 @WebServlet("/main")
 public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private HashMap<String, Controller> controllers;
        
-    public MainServlet() {
-        super();
+    public void init() throws ServletException {
+		try {
+	    	String path = getServletContext().getRealPath("/WEB-INF/beans.xml");
+	    	XmlBeanFactory fac = XmlBeanFactory.getInstance(path);
+	    	controllers = fac.getBeans();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,15 +48,13 @@ public class MainServlet extends HttpServlet {
 		 request.setCharacterEncoding("UTF-8");
 	        response.setContentType("text/html;charset=utf-8");
 	        PrintWriter out=response.getWriter();
-	        
-	        ObjectMapper om = new ObjectMapper();
-	        Map<String, Object> map = new HashMap<>();
-	        
-	        //return Map 생성
-	        Map<String, String> rmap = new HashMap<>();
-	        
+
+		    ObjectMapper om = new ObjectMapper();
+		    Map<String, Object> map = new HashMap<>();
+		    
+		    Map<String, String> rmap = new HashMap<>();
 	        try {
-	            Map<String, Object> js = om.readValue(request.getInputStream(), new TypeReference<Map<String, Object>>(){});
+		        Map<String, Object> js = om.readValue(request.getInputStream(), new TypeReference<Map<String, Object>>(){});
 	            String sign = (String) js.get("sign");
 	            System.out.println(sign);
 	            
@@ -57,14 +64,15 @@ public class MainServlet extends HttpServlet {
 	                
 	                switch(sign) {
 	                case "listPost":
-	                	
+	                	Controller con = controllers.get("PostController");
+	                	con.service(request, response);
 	                    break;
 	                    
-	                 default : rmap.put("msg", "잘못된 요청입니다");
+	                 default : rmap.put("msg", "sorry");
 	                }
 	            } else {
 	                System.out.println("secure coding...");
-	                rmap.put("msg", "잘못된 요청입니다");
+	                rmap.put("msg", "sorrysorry");
 	            }
 	            
 	        } catch(Exception e) {
